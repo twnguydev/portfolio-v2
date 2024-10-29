@@ -1,0 +1,123 @@
+/* src/components/layout/MonitorLayout.css */
+:root {
+  --terminal-green: #0cff00;
+  --terminal-cyan: #00fff2;
+  --terminal-purple: #c400ff;
+  --terminal-dark: #000000;
+  --terminal-bg: #1a1a1a;
+  --monitor-border: #1f1f1f;
+  --monitor-screen: #000;
+
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 3vw, 2rem);
+
+  --font-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --font-sm: clamp(0.875rem, 2vw, 1rem);
+  --font-md: clamp(1rem, 2.5vw, 1.25rem);
+  --font-lg: clamp(1.25rem, 3vw, 1.5rem);
+  --font-xl: clamp(1.5rem, 4vw, 2rem);
+}
+
+.monitor-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+  padding: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet de grille en arrière-plan */
+.monitor-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(transparent 0%, rgba(12, 255, 0, 0.05) 2%, transparent 5%),
+    linear-gradient(90deg, transparent 0%, rgba(12, 255, 0, 0.05) 2%, transparent 5%);
+  background-size: 100px 100px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+}
+
+.monitor {
+  width: min(95%, 1400px);
+  height: 100%;
+  background: var(--monitor-border);
+  border-radius: clamp(5px, 1vw, 10px);
+  padding: clamp(10px, 2vw, 20px);
+  box-shadow: 
+    0 0 50px rgba(12, 255, 0, 0.2),
+    0 0 100px rgba(196, 0, 255, 0.1);
+  position: relative;
+  border: 1px solid rgba(12, 255, 0, 0.3);
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: var(--monitor-screen);
+  border-radius: clamp(3px, 0.5vw, 5px);
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(12, 255, 0, 0.2);
+}
+
+.terminal-container {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-md);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: var(--font-sm);
+  color: var(--terminal-green);
+  overflow: auto;
+}
+
+.terminal-status {
+  position: fixed;
+  bottom: var(--space-md);
+  left: var(--space-md);
+  font-size: var(--font-xs);
+  opacity: 0.5;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .monitor-container {
+    padding: var(--space-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  .monitor {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .terminal-container {
+    padding: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.25rem;
+  }
+}

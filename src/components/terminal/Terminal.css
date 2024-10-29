@@ -1,0 +1,265 @@
+/* src/components/terminal/Terminal.css */
+@font-face {
+  font-family: 'VT323';
+  src: url('../../app/fonts/VT323-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('../../app/fonts/ShareTechMono-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Fenêtre du terminal */
+.terminal-container {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-md);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: var(--font-sm);
+  color: var(--terminal-green);
+  overflow: auto;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--terminal-green);
+  padding-bottom: var(--space-xs);
+}
+
+.terminal-title {
+  font-family: 'VT323', monospace;
+  font-size: var(--font-lg);
+  margin: 0;
+}
+
+.terminal-window {
+  background: rgba(12, 255, 0, 0.05);
+  border: 1px solid var(--terminal-green);
+  padding: var(--space-md);
+  border-radius: 4px;
+  box-shadow: 
+    0 0 10px rgba(12, 255, 0, 0.1),
+    inset 0 0 20px rgba(12, 255, 0, 0.05);
+  position: relative;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-text {
+  white-space: pre-line;
+  line-height: 1.4;
+  font-family: 'Share Tech Mono', monospace;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-sm);
+  overflow-y: auto;
+  flex-grow: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--terminal-green) transparent;
+}
+
+.terminal-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-text::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-text::-webkit-scrollbar-thumb {
+  background-color: var(--terminal-green);
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+/* Input et prompt */
+.terminal-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.terminal-prompt-symbol {
+  color: var(--terminal-green);
+  font-weight: bold;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.terminal-input {
+  background: transparent;
+  border-radius: 4px;
+  border: none;
+  background: rgba(12, 255, 0, 0.05);
+  color: var(--terminal-green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: var(--font-sm);
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+}
+
+.terminal-input:focus {
+  border: 1px solid var(--terminal-green);
+}
+
+/* Mode développeur */
+.dev-mode {
+  border: 1px solid var(--terminal-purple);
+  background: rgba(196, 0, 255, 0.05);
+}
+
+.dev-mode-header {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+  flex-wrap: wrap;
+}
+
+.dev-badge {
+  background: var(--terminal-purple);
+  color: var(--terminal-dark);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: var(--font-xs);
+  font-weight: bold;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Animations et effets */
+.terminal-prompt {
+  animation: pulse 2s infinite;
+}
+
+.access-button {
+  background: transparent;
+  border: 1px solid var(--terminal-green);
+  color: var(--terminal-green);
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.access-button:hover {
+  background: var(--terminal-green);
+  color: var(--terminal-dark);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.access-button:hover {
+  background: var(--terminal-green);
+  color: var(--terminal-dark);
+  box-shadow: 
+    0 0 15px rgba(12, 255, 0, 0.5),
+    0 0 30px rgba(12, 255, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.access-button:hover::before {
+  left: 100%;
+}
+
+/* Loading spinner */
+.loading-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-sm);
+}
+
+.loading-spinner {
+  width: clamp(16px, 4vw, 20px);
+  height: clamp(16px, 4vw, 20px);
+  border: 2px solid var(--terminal-green);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Effets spéciaux */
+.secret-command {
+  color: var(--terminal-cyan);
+  animation: secretReveal 0.5s ease-in-out;
+}
+
+.hint-text {
+  color: var(--terminal-purple);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Keyframes */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: none; opacity: 1; }
+  7% { transform: skew(-0.5deg, -0.9deg); }
+  10% { transform: none; }
+  27% { transform: none; }
+  30% { transform: skew(0.8deg, -0.1deg); }
+  35% { transform: none; }
+  52% { transform: none; }
+  55% { transform: skew(-1deg, 0.2deg); }
+  50% { transform: none; }
+  72% { transform: none; }
+  75% { transform: skew(0.4deg, 1deg); }
+  80% { transform: none; }
+  100% { transform: none; }
+}
+
+@keyframes secretReveal {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .terminal-window {
+    padding: var(--space-sm);
+  }
+  
+  .dev-mode-header {
+    gap: 0.5rem;
+  }
+  
+  .terminal-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .access-button {
+    width: 100%;
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .dev-badge {
+    font-size: calc(var(--font-xs) * 0.9);
+  }
+}
